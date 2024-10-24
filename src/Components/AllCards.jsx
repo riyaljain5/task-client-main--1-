@@ -404,7 +404,7 @@ const AllCards = () => {
             <img
               src={getRandomGirlImage(card.location)}
               alt={`Meeting ${card.id}`}
-              className="object-cover w-full h-48"
+              className="object-cover w-full h-62"
             />
             <div className="p-4 flex flex-col ">
               
