@@ -2,61 +2,266 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faMapMarkerAlt, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faTelegramPlane, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 
 const mockData = [
-  { id: 1, location: 'Delhi', title: 'Meeting in Delhi', description: 'This is a meeting in Delhi.' },
-  { id: 2, location: 'Delhi', title: 'Meeting in Delhi 2', description: 'This is a second meeting in Delhi.' },
-  { id: 3, location: 'Delhi', title: 'Meeting in Delhi 3', description: 'This is a third meeting in Delhi.' },
-  { id: 4, location: 'Delhi', title: 'Meeting in Delhi 4', description: 'This is a fourth meeting in Delhi.' },
-  { id: 5, location: 'Delhi', title: 'Meeting in Delhi 5', description: 'This is a fifth meeting in Delhi.' },
-  { id: 6, location: 'Delhi', title: 'Meeting in Delhi 6', description: 'This is a sixth meeting in Delhi.' },
-  { id: 7, location: 'Delhi', title: 'Meeting in Delhi 7', description: 'This is a seventh meeting in Delhi.' },
-  { id: 8, location: 'Delhi', title: 'Meeting in Delhi 8', description: 'This is an eighth meeting in Delhi.' },
-  { id: 9, location: 'Delhi', title: 'Meeting in Delhi 9', description: 'This is a ninth meeting in Delhi.' },
-  { id: 10, location: 'Delhi', title: 'Meeting in Delhi 10', description: 'This is a tenth meeting in Delhi.' },
-  { id: 11, location: 'Mumbai', title: 'Meeting in Mumbai', description: 'This is a meeting in Mumbai.' },
-  { id: 12, location: 'Mumbai', title: 'Meeting in Mumbai 2', description: 'This is a second meeting in Mumbai.' },
-  { id: 13, location: 'Mumbai', title: 'Meeting in Mumbai 3', description: 'This is a third meeting in Mumbai.' },
-  { id: 14, location: 'Mumbai', title: 'Meeting in Mumbai 4', description: 'This is a fourth meeting in Mumbai.' },
-  { id: 15, location: 'Mumbai', title: 'Meeting in Mumbai 5', description: 'This is a fifth meeting in Mumbai.' },
-  { id: 16, location: 'Mumbai', title: 'Meeting in Mumbai 6', description: 'This is a sixth meeting in Mumbai.' },
-  { id: 17, location: 'Mumbai', title: 'Meeting in Mumbai 7', description: 'This is a seventh meeting in Mumbai.' },
-  { id: 18, location: 'Mumbai', title: 'Meeting in Mumbai 8', description: 'This is an eighth meeting in Mumbai.' },
-  { id: 19, location: 'Mumbai', title: 'Meeting in Mumbai 9', description: 'This is a ninth meeting in Mumbai.' },
-  { id: 20, location: 'Mumbai', title: 'Meeting in Mumbai 10', description: 'This is a tenth meeting in Mumbai.' },
-  { id: 21, location: 'Pune', title: 'Meeting in Pune', description: 'This is a meeting in Pune.' },
-  { id: 22, location: 'Pune', title: 'Meeting in Pune 2', description: 'This is a second meeting in Pune.' },
-  { id: 23, location: 'Pune', title: 'Meeting in Pune 3', description: 'This is a third meeting in Pune.' },
-  { id: 24, location: 'Pune', title: 'Meeting in Pune 4', description: 'This is a fourth meeting in Pune.' },
-  { id: 25, location: 'Pune', title: 'Meeting in Pune 5', description: 'This is a fifth meeting in Pune.' },
-  { id: 26, location: 'Pune', title: 'Meeting in Pune 6', description: 'This is a sixth meeting in Pune.' },
-  { id: 27, location: 'Pune', title: 'Meeting in Pune 7', description: 'This is a seventh meeting in Pune.' },
-  { id: 28, location: 'Pune', title: 'Meeting in Pune 8', description: 'This is an eighth meeting in Pune.' },
-  { id: 29, location: 'Pune', title: 'Meeting in Pune 9', description: 'This is a ninth meeting in Pune.' },
-  { id: 30, location: 'Pune', title: 'Meeting in Pune 10', description: 'This is a tenth meeting in Pune.' },
-  { id: 31, location: 'Chennai', title: 'Meeting in Chennai', description: 'This is a meeting in Chennai.' },
-  { id: 32, location: 'Chennai', title: 'Meeting in Chennai 2', description: 'This is a second meeting in Chennai.' },
-  { id: 33, location: 'Chennai', title: 'Meeting in Chennai 3', description: 'This is a third meeting in Chennai.' },
-  { id: 34, location: 'Chennai', title: 'Meeting in Chennai 4', description: 'This is a fourth meeting in Chennai.' },
-  { id: 35, location: 'Chennai', title: 'Meeting in Chennai 5', description: 'This is a fifth meeting in Chennai.' },
-  { id: 36, location: 'Chennai', title: 'Meeting in Chennai 6', description: 'This is a sixth meeting in Chennai.' },
-  { id: 37, location: 'Chennai', title: 'Meeting in Chennai 7', description: 'This is a seventh meeting in Chennai.' },
-  { id: 38, location: 'Chennai', title: 'Meeting in Chennai 8', description: 'This is an eighth meeting in Chennai.' },
-  { id: 39, location: 'Chennai', title: 'Meeting in Chennai 9', description: 'This is a ninth meeting in Chennai.' },
-  { id: 40, location: 'Chennai', title: 'Meeting in Chennai 10', description: 'This is a tenth meeting in Chennai.' },
-  { id: 41, location: 'Kolkata', title: 'Meeting in Kolkata', description: 'This is a meeting in Kolkata.' },
-  { id: 42, location: 'Kolkata', title: 'Meeting in Kolkata 2', description: 'This is a second meeting in Kolkata.' },
-  { id: 43, location: 'Kolkata', title: 'Meeting in Kolkata 3', description: 'This is a third meeting in Kolkata.' },
-  { id: 44, location: 'Kolkata', title: 'Meeting in Kolkata 4', description: 'This is a fourth meeting in Kolkata.' },
-  { id: 45, location: 'Kolkata', title: 'Meeting in Kolkata 5', description: 'This is a fifth meeting in Kolkata.' },
-  { id: 46, location: 'Kolkata', title: 'Meeting in Kolkata 6', description: 'This is a sixth meeting in Kolkata.' },
-  { id: 47, location: 'Kolkata', title: 'Meeting in Kolkata 7', description: 'This is a seventh meeting in Kolkata.' },
-  { id: 48, location: 'Kolkata', title: 'Meeting in Kolkata 8', description: 'This is an eighth meeting in Kolkata.' },
-  { id: 49, location: 'Kolkata', title: 'Meeting in Kolkata 9', description: 'This is a ninth meeting in Kolkata.' },
-  { id: 50, location: 'Kolkata', title: 'Meeting in Kolkata 10', description: 'This is a tenth meeting in Kolkata.' },
+  { id: 1, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 2, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 3, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 4, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 5, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 6, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 7, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 8, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 9, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 10, 
+    location: 'Delhi', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+
+  { id: 11, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 12, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 13, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 14, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 15, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 16, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 17, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 18, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 19, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 20, 
+    location: 'Mumbai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  
+  { id: 21, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 22, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 23, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 24, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 25, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 26, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 27, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 28, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 29, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 30, 
+    location: 'Pune', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+
+  { id: 31, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 32, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 33, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 34, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 35, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 36, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 37, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 38, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 39, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 40, 
+    location: 'Chennai', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+
+  { id: 41, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 42, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 43, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 44, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 45, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 46, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 47, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 48, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 49, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+  { id: 50, 
+    location: 'Kolkata', 
+    title: 'VIDEO CALL SERVICE, SEXY CALL GIRL, FULL NUDE VIDEO CALL SERVICE LOW, PRICE FULL ENJOY ',
+    description: 'am independent college girl working as Video call Girl full Nude Video call As you like as your mood. Its my guarantee that you will fill like real meet. with maximum satisfaction. ' 
+  },
+
 ];
 
 const randomGirl = [
@@ -201,25 +406,39 @@ const AllCards = () => {
               alt={`Meeting ${card.id}`}
               className="object-cover w-full h-48"
             />
-            <div className="p-2 flex ">
-              <div>
+            <div className="p-4 flex flex-col ">
+              
               <h1 className="text-lg font-bold mb-2">{card.title}</h1>
               <p className="text-gray-600 text-base">{card.description}</p>
-              </div>
-              <div>
-              <div className="flex space-x-2">
- 
-              <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
-        <FontAwesomeIcon icon={faPhone} />
+            
+              <div className="flex space-x-2 mt-2">
+              
+              <div className="flex items-center space-x-2 mr-5">
+        <button className="flex items-center space-x-1 text-sm bg-gray-200 rounded-lg px-2 py-1">
+          {/* User Icon */}
+          <FontAwesomeIcon icon={faUser} className="text-gray-600" />
+          <span>25</span> {/* Age */}
+        </button>
+
+        <button className="flex items-center mr-4 space-x-1 text-sm bg-gray-200 rounded-lg px-2 py-1 ">
+          {/* Location Icon */}
+          <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-600" />
+          <span>{selectedLocation}</span> {/* Location */}
+        </button>
       </div>
-
-
-      <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
-        <FontAwesomeIcon icon={faWhatsapp} />
-      </div>
-</div>
-
+                <div className="w-10 h-10  rounded-full bg-blue-500 flex items-center justify-center text-white">
+                  <FontAwesomeIcon icon={faPhone} />
+                </div>
+                
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                  <FontAwesomeIcon icon={faWhatsapp} />
+                </div>
+            
+                <div className="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center text-white">
+                  <FontAwesomeIcon icon={faTelegramPlane} />
+                </div>
               </div>
+
             </div>
           </motion.div>
         ))}

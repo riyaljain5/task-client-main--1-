@@ -1,4 +1,4 @@
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faTelegramPlane, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
@@ -70,6 +70,9 @@ const Content = () => {
       <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
         <FontAwesomeIcon icon={faWhatsapp} />
       </div>
+      <div className="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center text-white">
+                  <FontAwesomeIcon icon={faTelegramPlane} />
+                </div>
 </div>
         </div>
 
