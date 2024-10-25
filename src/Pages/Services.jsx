@@ -32,7 +32,7 @@ const Services = () => {
 
       {/* Locations Section */}
       <motion.div
-        className="w-full max-w-6xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 py-6 px-4 border-2 border-[#286181] rounded-lg"
+        className="w-full max-w-6xl grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-2 py-6 px-4 border-2 border-[#286181] rounded-lg"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -53,7 +53,7 @@ const Services = () => {
           </div>
         ))}
       </motion.div>
-      
+
     </section>
   );
 };
