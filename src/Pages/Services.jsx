@@ -53,6 +53,41 @@ const Services = () => {
           </div>
         ))}
       </motion.div>
+      <div className='flex flex-col gap-5 items-center justify-center px-6 py-8'>
+        <div className='text-center w-3/4 md:w-3/4'>
+          <h1>What Makes Call Girls in Bangalore CGKeech Special?</h1>
+          <p>Cgkeech.com is trusted by many people around Bangalore, CGKeech serves a large client base across every city in India, fulfilling all expectations of needed from Call girls with affordable rates and sensational pleasures
+            Don’t wait! Go after what you want right now. Check out what is available in your area. Look for the services that sound good to you. You can find a Call girls in Bangalore who can help make your dreams come true. It is easy to pick what you like and book a time. Enjoy every moment and have fun. Life is short, so don’t hold back! Make a choice and go for it. You'll feel great when you fulfill your desires. So, take a step today and start your exciting adventure. Happiness is just a booking away!
+          </p>
+        </div>
+
+        <div className='text-center w-3/4 md:w-3/4'>
+          <h1>Can I request role-playing or other erotic scenarios?</h1>
+          <p>You can expect all your fantasies to come true, whether you want roleplaying or soft sex that goes on harder with time and lasts all night, expect everything you want with call girls near Bangalore your location that can give you the best service as per your desires.
+          Have fun, relax, and enjoy everything you ask for. It’s all about your pleasure and making your nights exciting. Don’t wait—let us help you find the perfect match for your wishes!
+          </p>
+        </div>
+
+        <div className='text-center w-3/4 md:w-3/4'>
+          <h1>Can I book two or more call girls Bangalore at the same time?</h1>
+          <p>Yes , you can book more that one call girl Bangalore and enjoy a heavy threesome , foursome experience where the only aim of call girls is to make you feel satisfied , have all kind of sex you want let it be anal , vaginal , pegging etc, call girls of all specialized fields to help you with that so that you don’t sleep without getting your dreams fulfilled.
+          </p>
+        </div>
+
+        <div className='text-center w-3/4 md:w-3/4'>
+          <h1>Where to find affordable call girls in Bangalore?</h1>
+          <p>At Cgkeech, you can find call girls of all range , no matter if you don’t have enough money to afford a high paying girl , we offer a large range of catalogue of Bangalore call girls and agencies for you to book that will come in your budget , and you will have a memorable experience at that . 
+          </p>
+        </div>
+
+        <div className='text-center w-3/4 md:w-3/4'>
+          <h1>Can I find genuine and good Bangalore call girl here?</h1>
+          <p>We host profiles of  all the Bangalore call girl from novice to advance , you can have beginner call girl and be one of the first ones to teach her all her way to mastery of sexual pleasures or you can have our advance call girls give you the best time in sex you ever had with girls, they will have sex until you are free from your senses and then you will know what is the real meaning of sex. 
+          </p>
+        </div>
+
+
+      </div>
 
     </section>
   );

@@ -33,7 +33,7 @@ const Explore = () => {
     >
       {/* Animated Heading */}
       <motion.h1
-        className="text-3xl md:text-6xl font-bold text-center text-gray-800 mb-4"
+        className="text-3xl md:text-6xl font-bold text-center text-[#286181] mb-4"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
